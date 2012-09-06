@@ -1,11 +1,13 @@
 use <tools/MCAD/metric_fasteners.scad>
 
-width = 39.5;	// actual is 1.550"
-height = 35.5;	// actual is 1"
+width = 39.4;	// actual is 1.550"
+height = 25.4;	// actual is 1"
 depth = 3;
 wall_thickness = 5;
 pcb_z_offset = 7;
 slot_dist_from_edge = 5;
+pcb_pad_width = 9;
+pcb_pad_height = 10;
 
 term_mnt_5mm_2hole(width, height, depth, wall_thickness);
 
@@ -15,8 +17,8 @@ difference() {
 	// pcb mount pads
     minkowski() {
       union() {
-    translate([h - (10 / 2), 0, d]) cube([9, 10, pcb_z_offset + 0.1]);
-    translate([0, h - 10, d]) cube([9, 10, pcb_z_offset + 0.1]);
+    translate([w - pcb_pad_width, 0, d]) cube([pcb_pad_width, pcb_pad_height, pcb_z_offset + 0.1]);
+    translate([0, h - pcb_pad_height, d]) cube([pcb_pad_width, pcb_pad_height, pcb_z_offset + 0.1]);
     }
     translate([0, 0, 0]) cylinder(r = 1, h = 0.1, center = true, $fn = 12);
   }
@@ -29,9 +31,9 @@ difference() {
   }
 }
     // extrusion clip mount hole
-    translate([w / 2 - 12 /2, slot_dist_from_edge, -0.01]) cube([12.1, 10.1, d + 3]);
+    translate([w / 2 - 20.1 / 2, slot_dist_from_edge, -0.01]) cube([20.1, 10.1, d + 3]);
     // pcb mount hls
-    translate([w - 4.5, 3.9, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcb_z_offset * 2 + 0.1, center = true, $fn = 24);
-    translate([3.9, h - 4.5, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4+ pcb_z_offset * 2 + 0.1, center = true, $fn = 24);
+    translate([w - (pcb_pad_width / 2), pcb_pad_height / 2, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcb_z_offset * 2 + 0.1, center = true, $fn = 24);
+    translate([pcb_pad_width / 2, h - (pcb_pad_height / 2), 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4+ pcb_z_offset * 2 + 0.1, center = true, $fn = 24);
 }
 }
