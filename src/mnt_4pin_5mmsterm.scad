@@ -1,5 +1,5 @@
-width = 25.4;	// actual is 1"
-height = 39.4;	// actual is 1.550"
+width = 39.4;	// actual is 1.550"
+height = 25.4;	// actual is 1"
 depth = 3;
 wall_thickness = 5;
 pcb_z_offset = 5;

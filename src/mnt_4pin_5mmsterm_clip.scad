@@ -1,13 +1,15 @@
 use <tools/MCAD/metric_fasteners.scad>
 
-width = 39.4;	// actual is 1.550"
-height = 25.4;	// actual is 1"
+width = 25.4;	// actual is 1"
+height = 39.4;	// actual is 1.550"
 depth = 3;
 wall_thickness = 5;
 pcb_z_offset = 7;
 slot_dist_from_edge = 5;
 pcb_pad_width = 9;
 pcb_pad_height = 10;
+clip_width = 13.1;
+clip_height = 10.1;
 
 term_mnt_5mm_2hole(width, height, depth, wall_thickness);
 
@@ -31,7 +33,7 @@ difference() {
   }
 }
     // extrusion clip mount hole
-    translate([w / 2 - 20.1 / 2, slot_dist_from_edge, -0.01]) cube([20.1, 10.1, d + 3]);
+    translate([w / 2 - 20.1 / 2, slot_dist_from_edge, -0.01]) cube([clip_height, clip_width, d + 3]);
     // pcb mount hls
     translate([w - (pcb_pad_width / 2), pcb_pad_height / 2, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcb_z_offset * 2 + 0.1, center = true, $fn = 24);
     translate([pcb_pad_width / 2, h - (pcb_pad_height / 2), 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4+ pcb_z_offset * 2 + 0.1, center = true, $fn = 24);

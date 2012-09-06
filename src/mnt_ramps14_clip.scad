@@ -4,10 +4,13 @@ depth = 3;
 wall_thickness = 5;
 pcb_z_offset = 10;
 slot_dist_from_edge = 5;
+clip = true;		// false for t-slot holes
+clip_width = 13.1;
+clip_height = 10.1;
 
-term_mnt_5mm_2hole(width, height, depth, wall_thickness);
+term_mnt_5mm_2hole(width, height, depth, wall_thickness, clip);
 
-module term_mnt_5mm_2hole(w, h, d, wt) {
+module term_mnt_5mm_2hole(w, h, d, wt, clip = true) {
 difference() {
   union() {
 	// pcb mount pads
@@ -27,10 +30,19 @@ difference() {
     translate([0, 0, 0]) cylinder(r = 1, h = 0.01, center = true, $fn = 12);
   }
 }
+  if (clip) {
     // extrusion clip mount hole
-    translate([w / 2 - 12 / 2, slot_dist_from_edge, -0.01]) cube([12.1, 10.1, d + 3]);
+    translate([w / 2 - 20 / 2, slot_dist_from_edge, -0.01]) cube([clip_width, clip_height, d + 3]);
     // extrusion clip mount hole 2
-    translate([slot_dist_from_edge, h / 2 - 10 / 2, -0.01]) cube([10.1, 12.1, d + 3]);
+    translate([slot_dist_from_edge, h / 2 - 10 / 2, -0.01]) cube([clip_height, clip_width, d + 3]);
+  } else {
+    for(y = [slot_dist_from_edge, slot_dist_from_edge * 6]) {
+    // M4 mount screw hole
+    translate([slot_dist_from_edge, y, 0]) cylinder(r = 2, h = d * 2 + 0.1, center = true, $fn = 24);
+    // M4 mount countersink
+    translate([slot_dist_from_edge, y, 4]) cylinder(r = 3.2, h = d + 0.1, center = true, $fn = 24);
+    }
+  }
     // pcb mount hls
     translate([5, 70, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcb_z_offset * 2 + 0.1, center = true, $fn = 24);
     translate([52.75, 66.5, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcb_z_offset * 2 + 0.1, center = true, $fn = 24);
