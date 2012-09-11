@@ -11,16 +11,17 @@ pcb_pad_height = 10;
 clip_width = 13.1;
 clip_height = 10.1;
 
-term_mnt_5mm_2hole(width, height, depth, wall_thickness);
+term_mnt_5mm_clip(width, height, depth, wall_thickness, pcb_z_offset, slot_dist_from_edge, 
+	pcb_pad_width, pcb_pad_height, clip_width, clip_height);
 
-module term_mnt_5mm_2hole(w, h, d, wt) {
+module term_mnt_5mm_clip(w, h, d, wt, pcbz, sdfe, ppw, pph, cw, ch) {
 difference() {
   union() {
 	// pcb mount pads
     minkowski() {
       union() {
-    translate([w - pcb_pad_width, 0, d]) cube([pcb_pad_width, pcb_pad_height, pcb_z_offset + 0.1]);
-    translate([0, h - pcb_pad_height, d]) cube([pcb_pad_width, pcb_pad_height, pcb_z_offset + 0.1]);
+    translate([w - ppw, 0, d]) cube([ppw, pph, pcbz + 0.1]);
+    translate([0, h - pph, d]) cube([ppw, pph, pcbz + 0.1]);
     }
     translate([0, 0, 0]) cylinder(r = 1, h = 0.1, center = true, $fn = 12);
   }
@@ -33,9 +34,9 @@ difference() {
   }
 }
     // extrusion clip mount hole
-    translate([w / 2 - 20.1 / 2, slot_dist_from_edge, -0.01]) cube([clip_height, clip_width, d + 3]);
+    translate([w / 2 - 20.1 / 2, sdfe, -0.01]) cube([ch, cw, d + 3]);
     // pcb mount hls
-    translate([w - (pcb_pad_width / 2), pcb_pad_height / 2, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcb_z_offset * 2 + 0.1, center = true, $fn = 24);
-    translate([pcb_pad_width / 2, h - (pcb_pad_height / 2), 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4+ pcb_z_offset * 2 + 0.1, center = true, $fn = 24);
+    translate([w - (ppw / 2), pph / 2, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcbz * 2 + 0.1, center = true, $fn = 24);
+    translate([ppw / 2, h - (pph / 2), 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4+ pcbz * 2 + 0.1, center = true, $fn = 24);
 }
 }

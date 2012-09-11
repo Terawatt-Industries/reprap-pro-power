@@ -20,6 +20,20 @@
 	<echo message="Load property file: ${isUnix}settings.properties" />
     <fl:install-property-handler />
 
+    <!-- load build profile -->
+	<condition property="profile-id" value="${profileId}" else="idler-acetal">
+		<isset property="profileId" />
+	</condition>
+	<typedef name="loadBuildProfile" classname="com.longevitysoft.ant.ProfilePropertyBuilder">
+		<classpath>
+			<pathelement location="${basedir}/${build-tools-dir-name}/lsoft-ant-tasks-0.1-20120804.jar" />
+		</classpath>
+	</typedef>
+
+	<target name="load-profile-properties" description="load build profiles xml as ant properties">
+		<loadBuildProfile xmlFile="${build-tools-dir-name}/build_profiles.xml" profileId="${profile-id}" />
+	</target>
+
 	<target name="pkg-source-files" description="TAR and GZIP the /src fileset">
 		<property name="tar-filename"  value="${dist-dir}/${proj}-source"/>
 
@@ -94,5 +108,28 @@
             </fl:switch>
         </fl:for>
     </target>
+
+	<target name="--clean-filtered-scad" description="scrub filtered code files">
+		<delete file="${src-dir}/ant_assembly.scad" />
+	</target>
+
+	<target name="build-filtered-assembly-scad" depends="--clean-filtered-scad,load-profile-properties" description="build the filtered scad code to assemble multiple parts">
+        <property name="scad-assembly" value="${src-dir}/ant_assembly.scad" />
+        <property name="scad-assembly-template" value="${basedir}/tools/build/ant_assembly.scad.tpl" />
+		<echo message="filtering code for the '${profile-id}' profile ..." />
+        <copy file="${scad-assembly-template}" tofile="${scad-assembly}"/>
+        <replace file="${scad-assembly}" token="!scad.filename!" value="${scad-filename}" />
+        <replace file="${scad-assembly}" token="!scad.call!" value="${scad-call}" />
+        <echo message="compile assembly -> STL ..." />
+        <exec executable="${exec.path.oscad}">
+            <arg line="-o ${dist-dir}/${output-file}.stl" />
+            <arg line="-D 'quality=&quot;production&quot;'" />
+            <arg line="${scad-assembly}" />
+        </exec>
+        <echo message="cleanup assembly template ..." />
+        <delete file="${scad-assembly}"/>
+        <echo message="done" />
+        
+	</target>
 
 </project>
