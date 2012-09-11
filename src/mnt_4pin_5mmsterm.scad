@@ -2,7 +2,7 @@ width = 39.4;	// actual is 1.550"
 height = 25.4;	// actual is 1"
 depth = 3;
 wall_thickness = 5;
-pcb_z_offset = 5;
+pcb_z_offset = 11;
 pcb_pad_width = 9;
 pcb_pad_height = 10;
 

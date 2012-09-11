@@ -8,8 +8,8 @@ pcb_z_offset = 7;
 slot_dist_from_edge = 5;
 pcb_pad_width = 9;
 pcb_pad_height = 10;
-clip_width = 13.1;
-clip_height = 10.1;
+clip_width = 22.1;
+clip_height = 7.1;
 
 term_mnt_5mm_clip(width, height, depth, wall_thickness, pcb_z_offset, slot_dist_from_edge, 
 	pcb_pad_width, pcb_pad_height, clip_width, clip_height);
