@@ -1,0 +1,3 @@
+The Terawatt Industries Terminal Mounts SCAD files (and derived distributables) are licensed under a Creative Commons Attribution 3.0 Unported License.
+
+The ANT build is licensed separately.  See NOTICE.TXT and build.xml for licensing text.
