@@ -1,11 +1,11 @@
-width = 57.75;	// actual is 1.550"
-height = 75;	// actual is 1"
+width = 58;	
+height = 92.5;	
 depth = 3;
 wall_thickness = 5;
-pcb_z_offset = 10;
+pcb_z_offset = 11;
 slot_dist_from_edge = 5;
 clip = false;		// false for t-slot holes
-clip_width = 22.1;
+clip_width = 29.1;
 clip_height = 7.1;
 
 term_mnt_ramps14(width, height, depth, wall_thickness, pcb_z_offset, slot_dist_from_edge, 
@@ -18,8 +18,8 @@ difference() {
     minkowski() {
       union() {
     translate([w - 9, 0, d]) cube([9, 10, pcbz + 0.1]);
-    translate([0, h - 10, d]) cube([9, 10, pcbz + 0.1]);
-    translate([w - 9, h - 13.5, d]) cube([9, 10, pcbz + 0.1]);
+    translate([0, h - 12.5, d]) cube([9, 10, pcbz + 0.1]);
+    translate([w - 9, h - 10, d]) cube([9, 10, pcbz + 0.1]);
     }
     translate([0, 0, 0]) cylinder(r = 1, h = 0.1, center = true, $fn = 12);
   }
@@ -45,8 +45,8 @@ difference() {
     }
   }
     // pcb mount hls
-    translate([5, 70, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcbz * 2 + 0.1, center = true, $fn = 24);
-    translate([52.75, 66.5, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcbz * 2 + 0.1, center = true, $fn = 24);
-    translate([52.75, 5, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4+ pcbz * 2 + 0.1, center = true, $fn = 24);
+    translate([5, 85, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcbz * 2 + 0.1, center = true, $fn = 24);
+    translate([53, 87.5, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcbz * 2 + 0.1, center = true, $fn = 24);
+    translate([53, 5, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4+ pcbz * 2 + 0.1, center = true, $fn = 24);
 }
 }
