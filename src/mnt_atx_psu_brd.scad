@@ -7,7 +7,7 @@ wall_thickness = 5;
 pcb_z_offset = 11;
 slot_dist_from_edge = 5;
 clip = false;		// false for t-slot holes
-clip_width = 29.1;
+clip_width = 23.1;
 clip_height = 7.1;
 
 term_mnt_atx_psubrd(width, height, depth, wall_thickness, pcb_z_offset, slot_dist_from_edge, 
@@ -40,10 +40,10 @@ difference() {
     translate([sdfe, h / 2 - 10 / 2, -0.01]) cube([ch, cw, d + 3]);
   } else {
     for(x = [w - sdfe, w - sdfe * 6]) {
-    // M4 mount screw hole
-    translate([x, h - sdfe, 0]) cylinder(r = 2, h = d * 2 + 0.1, center = true, $fn = 24);
-    // M4 mount countersink
-    translate([x, h - sdfe, 4]) cylinder(r = 3.2, h = d + 0.1, center = true, $fn = 24);
+    // M5 mount screw hole
+    translate([x, h - sdfe, 0]) cylinder(r = 2.51, h = d * 2 + 0.1, center = true, $fn = 24);
+    // M5 mount countersink
+    translate([x, h - sdfe, 4]) cylinder(r = 3.6, h = d + 0.1, center = true, $fn = 24);
   }
 }
     // pcb mount hls

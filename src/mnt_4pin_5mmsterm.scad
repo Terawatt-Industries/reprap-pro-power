@@ -32,7 +32,7 @@ difference() {
     // M5 mount screw hole
     translate([w / 2, h / 2, 0]) cylinder(r = 2.51, h = d * 2 + 0.1, center = true, $fn = 24);
     // M5 mount countersink
-    translate([w / 2, h / 2, 4]) cylinder(r = 3.1, h = d + 0.1, center = true, $fn = 24);
+    translate([w / 2, h / 2, 4]) cylinder(r = 3.6, h = d + 0.1, center = true, $fn = 24);
     // pcb mount hls
     translate([ppw / 2, pph / 2, 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcbz * 2 + 0.1, center = true, $fn = 24);
     translate([w - (ppw / 2), h - (pph / 2), 0]) cylinder(r1 = 0.5, r2 = 2, h = d * 4 + pcbz * 2 + 0.1, center = true, $fn = 24);
