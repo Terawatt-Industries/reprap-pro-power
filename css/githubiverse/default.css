@@ -41,7 +41,7 @@ header h1 {
 	height : 40px;
 	overflow: hidden;
 	margin: 0;
-	padding: 0;
+	padding: 20px 0 0 0;
 }
 
 header h1 a {
