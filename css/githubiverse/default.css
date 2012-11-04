@@ -38,16 +38,16 @@ a:hover {
 }
 
 header h1 {
-	background: transparent url("../../img/terawatt/tw_logo_fc_150x91.png");
-	background-repeat:no-repeat;
-	background-position: 0 -11px;
-	padding: 20px 0 0 162px;
 	height : 40px;
 	overflow: hidden;
 	margin: 0;
+	padding: 20px 0 0 0;
 }
 
 header h1 a {
+	background: transparent url("../../img/terawatt/tw_logo_fc_150x91.png");
+	background-repeat:no-repeat;
+	background-position: 0 -11px;
 	color: #ffffff;
 }
 
