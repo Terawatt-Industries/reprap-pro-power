@@ -60,4 +60,12 @@
 	9, 9, true, 23.7, 6.5);</scad-call>
 		</properties>
 	</profile>
+	<profile>
+		<id>miniatxpsu</id>
+		<properties>
+			<output-file>mnt_psu</output-file>
+			<scad-filename>mnt_psu.scad</scad-filename>
+            <scad-call>power_mount();</scad-call>
+		</properties>
+	</profile>
 </profiles>
