@@ -1,7 +1,7 @@
 use <tools/MCAD/metric_fasteners.scad>
 
-width = 57.75;	// actual is 1.550"
-height = 75;	// actual is 1"
+width = 57.75;	
+height = 75;	
 depth = 3;
 wall_thickness = 5;
 pcb_z_offset = 11;
@@ -10,10 +10,9 @@ clip = false;		// false for t-slot holes
 clip_width = 23.1;
 clip_height = 7.1;
 
-term_mnt_atx_psubrd(width, height, depth, wall_thickness, pcb_z_offset, slot_dist_from_edge, 
-	pcb_pad_width, pcb_pad_height, clip, clip_width, clip_height);
+term_mnt_atx_psubrd(width, height, depth, wall_thickness, pcb_z_offset, slot_dist_from_edge, pcb_pad_width, pcb_pad_height, clip, clip_width, clip_height);
 
-module term_mnt_atx_psubrd(w, h, d, wt, pcbz, sdfe, ppw, pph, c, cw, ch) {
+module term_mnt_atx_psubrd(w = width, h = height, d = depth, wt = wall_thickness, pcbz = pcb_z_offset, sdfe = slot_dist_from_edge, ppw = pcb_pad_width, pph = pcb_pad_height, c = clip, cw = clip_width, ch = clip_height) {
 difference() {
   union() {
 	// pcb mount pads

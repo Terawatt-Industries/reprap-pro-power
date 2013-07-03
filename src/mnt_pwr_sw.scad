@@ -11,7 +11,7 @@ tolerance = 0.5;
 
 power_switch_mount(switch_height, switch_width, switch_depth, tolerance, wall_thickness, space_below_component, notch_height, notch_width, notch_z_offset);
 
-module power_switch_mount(h, w, d, tol, wt, sb, nh, nw, nzo) {
+module power_switch_mount(h = switch_height, w = switch_width, d = switch_depth, tol = tolerance, wt = wall_thickness, sb = space_below_component, nh = notch_height, nw = notch_width, nzo = notch_z_offset) {
 	difference() {
 		union() {
 			switch_enclosure(h, w, d, tol, wt, sb, nh, nw, nzo);
