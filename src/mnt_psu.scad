@@ -1,20 +1,3 @@
-/*Parametric X carriage for self-aligning bronze bushings, V1.0
-By David Orgeman
-Released under the terms of the GNU GPL v3.0 
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
 /*
 	3D Power Supply Mount
 	by Free Beachler of Terawatt Industries
@@ -35,12 +18,17 @@ m3_nut_diameter = 5.3;
 
 power_mount();
 // power supply
-% color([0.1, 0.9, 0]) translate([0, 2.5, 10]) cube([85, 175, 70]);
+//% color([0.1, 0.9, 0]) translate([0, 2.5, 10]) cube([85, 175, 70]);
 
 module power_mount() {
 	difference() {
-		platform();
-		translate([0, 2.5, 0]) mount_holes();
+		union() {
+			platform();
+			translate([0, 25 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2);
+			translate([0, 87.5 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2);
+			translate([0, 150 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2);
+		}
+		translate([0, 2.5, 2.5]) mount_holes();
 	}
 }
 
@@ -49,23 +37,42 @@ module platform() {
 		// round some corners
 		translate([0, 0, 5]) minkowski() {
 			difference() {
-				cube([85, 180, 25]);
-				translate([10, -5.1, 10]) cube([65, 205.2, 70]);
+				cube([90, 180, 25]);
+				translate([10, -5.1, 10]) cube([75, 205.2, 70]);
 			}
 			cylinder(r=2.5, h=0.01, center=false, $fn=12);
 			//	rotate([0, 90, 0]) cylinder(r=2.5, h=0.01, center=false, $fn=12);
 		}
-		translate([0, 2.5, 10]) cube([85 + 0.2, 175 + 0.2, 75]);
+		translate([0, 0, 10]) cube([87, 178, 75]);
 	}
-	// square mount area
-	translate([-9.5, -2.5, 5]) cube([9.5, 185, 25]);
+	// square the mount plate area
+	translate([-5.5, -2.5, 5]) cube([5.5, 185, 25]);
 	//	translate([-9.5, 5, 0]) cube([97.5, 185, 5]);
 }
 
 module mount_holes() {
-	for (i = [25, 150]) {
+	for (i = [25, 87.5, 150]) {
 		rotate([0, 90, 0]) translate([-10, i, -20]) cylinder(r=m5_diameter / 2, h=150, center = false, $fn=12);
 		rotate([0, 90, 0]) translate([-10, i, -4.9]) cylinder(r=m5_cap_diameter / 2, h=10, center = false, $fn=12);
 	}
 }
 
+
+module mount_arm_m3(h, w, d, tol, wt) {
+	for (z = [d - wt - 5 + 3.5]) {
+		// trapezoid block
+		difference() { 
+			hull() {
+				hull() {
+					translate([h - 10, w + 4, z - 6]) cube([10, 5, 10], center = false);
+					translate([h + 5, w, z + 6.5]) rotate([0, 90, 90]) cube([15, 15 + wt * 2, 5], center = false);
+				}
+				// rounded block
+				translate([h - 12.5, w + wt + 1.5 + 3.5, z + 2.5]) rotate([90, 0, 90]) cylinder(r = 1, h = 15, center = false, $fn = 24);
+				translate([h - 12.5, w + wt + 1.5 + 3.5, z - 7 + 2.5]) rotate([90, 0, 90]) cylinder(r = 1, h = 15, center = false, $fn = 24);
+			}
+			// M3 mount hole
+			translate([h - 5, w * 2, z - 3.5 + 2.5]) rotate([90, 0, 0]) cylinder(r = 1.6, h = d * 2, center = false, $fn = 24);
+		}
+	}
+}

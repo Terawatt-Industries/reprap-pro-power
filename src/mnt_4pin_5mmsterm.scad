@@ -1,14 +1,14 @@
-width = 39.4;	// actual is 1.550"
-height = 25.4;	// actual is 1"
-depth = 3;
-wall_thickness = 5;
-pcb_z_offset = 11;
+width = 35.4;	// actual is 1.550"
+height = 20.4;	// actual is 1"
+depth = 7;
+wall_thickness = 10;
+pcb_z_offset = 8;
 pcb_pad_width = 9;
-pcb_pad_height = 10;
+pcb_pad_height = 14;
 
 term_mnt_5mm_2hole(width, height, depth, wall_thickness, pcb_z_offset, pcb_pad_width, pcb_pad_height);
 
-module term_mnt_5mm_2hole(w, h, d, wt, pcbz, ppw, pph) {
+module term_mnt_5mm_2hole(w = width, h = height, d = depth, wt = wall_thickness, pcbz = pcb_z_offset, ppw = pcb_pad_width, pph = pcb_pad_height) {
 difference() {
   union() {
 	// pcb mount pads

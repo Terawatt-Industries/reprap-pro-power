@@ -1,12 +1,14 @@
 width = 58;	
 height = 92.5;	
-depth = 3;
+depth = 3.25;
 wall_thickness = 5;
-pcb_z_offset = 11;
+pcb_z_offset = 8;
 slot_dist_from_edge = 5;
+pcb_pad_width = 9;
+pcb_pad_height = 9;
 clip = false;		// false for t-slot holes
-clip_width = 23.1;
-clip_height = 7.1;
+clip_width = 23.7;
+clip_height = 6.5;
 
 term_mnt_ramps14(width, height, depth, wall_thickness, pcb_z_offset, slot_dist_from_edge, 
 	pcb_pad_width, pcb_pad_height, clip, clip_width, clip_height);
@@ -41,7 +43,7 @@ difference() {
     // M5 mount screw hole
     translate([sdfe, y, 0]) cylinder(r = 2.51, h = d * 2 + 0.1, center = true, $fn = 24);
     // M5 mount countersink
-    translate([sdfe, y, 4]) cylinder(r = 3.6, h = d + 0.1, center = true, $fn = 24);
+    translate([sdfe, y, 6.5]) cylinder(r = 3.6, h = d + 0.1, center = true, $fn = 24);
     }
   }
     // pcb mount hls

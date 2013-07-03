@@ -2,7 +2,7 @@ use <tools/MCAD/metric_fasteners.scad>
 
 width = 25.4;	// actual is 1"
 height = 44.4;	// actual is 1.550"
-depth = 3;
+depth = 5;
 wall_thickness = 5;
 pcb_z_offset = 11;
 slot_dist_from_edge = 5;
