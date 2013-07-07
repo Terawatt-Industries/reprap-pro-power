@@ -20,15 +20,15 @@ power_mount();
 // power supply
 //% color([0.1, 0.9, 0]) translate([0, 2.5, 10]) cube([85, 175, 70]);
 
-module power_mount() {
+module power_mount(sd = m5_diameter, cd = m5_cap_diameter, m3 = m3_diameter) {
 	difference() {
 		union() {
 			platform();
-			translate([0, 25 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2);
+			translate([0, 25 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2, m3);
 			translate([0, 87.5 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2);
-			translate([0, 150 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2);
+			translate([0, 150 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2, m3);
 		}
-		translate([0, 2.5, 2.5]) mount_holes();
+		translate([0, 2.5, 2.5]) mount_holes(sd, cd);
 	}
 }
 
@@ -50,15 +50,15 @@ module platform() {
 	//	translate([-9.5, 5, 0]) cube([97.5, 185, 5]);
 }
 
-module mount_holes() {
+module mount_holes(sd, cd) {
 	for (i = [25, 87.5, 150]) {
-		rotate([0, 90, 0]) translate([-10, i, -20]) cylinder(r=m5_diameter / 2, h=150, center = false, $fn=12);
-		rotate([0, 90, 0]) translate([-10, i, -4.9]) cylinder(r=m5_cap_diameter / 2, h=10, center = false, $fn=12);
+		rotate([0, 90, 0]) translate([-10, i, -20]) cylinder(r=sd / 2, h=150, center = false, $fn=12);
+		rotate([0, 90, 0]) translate([-10, i, -4.9]) cylinder(r=cd / 2, h=10, center = false, $fn=12);
 	}
 }
 
 
-module mount_arm_m3(h, w, d, tol, wt) {
+module mount_arm_m3(h, w, d, tol, wt, m3) {
 	for (z = [d - wt - 5 + 3.5]) {
 		// trapezoid block
 		difference() { 
@@ -72,7 +72,7 @@ module mount_arm_m3(h, w, d, tol, wt) {
 				translate([h - 12.5, w + wt + 1.5 + 3.5, z - 7 + 2.5]) rotate([90, 0, 90]) cylinder(r = 1, h = 15, center = false, $fn = 24);
 			}
 			// M3 mount hole
-			translate([h - 5, w * 2, z - 3.5 + 2.5]) rotate([90, 0, 0]) cylinder(r = 1.6, h = d * 2, center = false, $fn = 24);
+			translate([h - 5, w * 2, z - 3.5 + 2.5]) rotate([90, 0, 0]) cylinder(r = m3 / 2, h = d * 2, center = false, $fn = 24);
 		}
 	}
 }
