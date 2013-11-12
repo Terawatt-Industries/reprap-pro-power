@@ -18,24 +18,24 @@ m3_nut_diameter = 5.3;
 
 power_mount();
 // power supply
-//% color([0.1, 0.9, 0]) translate([0, 2.5, 10]) cube([85, 175, 70]);
+// % color([0.1, 0.9, 0]) translate([0, 2.5, 10]) cube([85, 175, 45]);
 
 module power_mount(sd = m5_diameter, cd = m5_cap_diameter, m3 = m3_diameter) {
 	difference() {
 		union() {
 			platform();
-			translate([0, 25 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2, m3);
-			translate([0, 87.5 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2);
-			translate([0, 150 + 5 + 2.5, 17]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2, m3);
+			translate([0, 25 + 5 + 2.5, 12]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2, m3);
+			translate([0, 87.5 + 5 + 2.5, 12]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2);
+			translate([0, 150 + 5 + 2.5, 12]) rotate([0, 0, 90]) mount_arm_m3(0, 0, 0, 0.1, 2, m3);
 		}
-		translate([0, 2.5, 2.5]) mount_holes(sd, cd);
+		translate([0, 2.5, -2.5]) mount_holes(sd, cd);
 	}
 }
 
 module platform() {
 	difference() {
 		// round some corners
-		translate([0, 0, 5]) minkowski() {
+		translate([0, 0, 0]) minkowski() {
 			difference() {
 				cube([90, 180, 25]);
 				translate([10, -5.1, 10]) cube([75, 205.2, 70]);
@@ -43,11 +43,10 @@ module platform() {
 			cylinder(r=2.5, h=0.01, center=false, $fn=12);
 			//	rotate([0, 90, 0]) cylinder(r=2.5, h=0.01, center=false, $fn=12);
 		}
-		translate([0, 0, 10]) cube([87, 178, 75]);
+		translate([0, 0, 5]) cube([87, 178, 75]);
 	}
 	// square the mount plate area
-	translate([-5.5, -2.5, 5]) cube([5.5, 185, 25]);
-	//	translate([-9.5, 5, 0]) cube([97.5, 185, 5]);
+	translate([-5.5, -2.5, 0]) cube([5.5, 185, 25]);
 }
 
 module mount_holes(sd, cd) {
